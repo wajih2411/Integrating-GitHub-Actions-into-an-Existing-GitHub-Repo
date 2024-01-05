@@ -1,42 +1,22 @@
-name: Cypress Test
+name: Cypress Tests
 
-on:
-  push:
-    branches: [ main ]  # Replace 'main' with your branch name if different
-  pull_request:
-    branches: [ main ]
+on: [push, pull_request]
 
 jobs:
-  cypress-run:
+  cypress-test:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Setup Node
-      uses: actions/setup-node@v1
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
       with:
-        node-version: '14'  # Specify your project's Node.js version
+        node-version: '16'  # Adjust as per your project's Node.js version
 
     - name: Install Dependencies
       run: npm install
 
-    - name: Run Cypress Test
-      run: npm run test:cypress
-      env:
-        CI: true
-
-    - name: Upload Cypress artifacts
-      if: failure()
-      uses: actions/upload-artifact@v2
-      with:
-        name: cypress-screenshots
-        path: cypress/screenshots
-
-    - name: Upload Cypress videos
-      if: always()
-      uses: actions/upload-artifact@v2
-      with:
-        name: cypress-videos
-        path: cypress/videos
+    - name: Run Cypress Tests
+      run: npx cypress run
