@@ -1,9 +1,9 @@
-name: Cypress Tests (Login Spec)
+name: Cypress Tests
 
 on: [push, pull_request]
 
 jobs:
-  run-cypress-tests:
+  cypress-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -15,11 +15,19 @@ jobs:
       with:
         node-version: '16' 
 
+    - name: Cache Node modules
+      uses: actions/cache@v2
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
     - name: Install dependencies
       run: npm install
 
     - name: Run Cypress tests
       run: npx cypress run
       env:
-        CYPRESS_USERNAME: ${{ secrets.VALID_USERNAME }}
-        CYPRESS_PASSWORD: ${{ secrets.VALID_PASSWORD }}
+        CYPRESS_USERNAME: ${{ secrets.CYPRESS_USERNAME }}
+        CYPRESS_PASSWORD: ${{ secrets.CYPRESS_PASSWORD }}
