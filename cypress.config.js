@@ -5,12 +5,4 @@ module.exports = {
     },
   },
   defaultCommandTimeout: 20000,
-  const { defineConfig } = require('cypress');
-
-module.exports = defineConfig({
-  e2e: {
-    supportFile: false,
-    // ... other configurations
-  },
-});
 };
