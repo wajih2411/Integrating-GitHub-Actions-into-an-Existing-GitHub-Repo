@@ -18,10 +18,10 @@ jobs:
     - name: Install Dependencies
       run: npm install
 
-    - name: Verify Cypress Installation
-      run: npx cypress verify
+    - name: List Project Structure
+      run: ls -la
 
-    - name: List Spec Files in Integration Directory
+    - name: List Cypress Integration Directory
       run: ls -la cypress/integration/
 
     - name: Run Cypress Tests
