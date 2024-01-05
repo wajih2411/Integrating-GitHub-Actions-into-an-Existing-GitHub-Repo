@@ -1,0 +1,25 @@
+name: Cypress Tests (Login Spec)
+
+on: [push, pull_request]
+
+jobs:
+  run-cypress-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'  # Choose the Node.js version you need
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run Cypress tests
+      run: npx cypress run
+      env:
+        CYPRESS_USERNAME: ${{ secrets.VALID_USERNAME }}
+        CYPRESS_PASSWORD: ${{ secrets.VALID_PASSWORD }}
