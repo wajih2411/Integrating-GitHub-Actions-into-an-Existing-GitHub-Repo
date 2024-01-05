@@ -3,7 +3,7 @@ name: Cypress Tests
 on: [push, pull_request]
 
 jobs:
-  cypress-test:
+  run-tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,11 +18,5 @@ jobs:
     - name: Install Dependencies
       run: npm install
 
-    - name: List Project Structure
-      run: ls -la
-
-    - name: List Cypress Integration Directory
-      run: ls -la cypress/integration/
-
-    - name: Run Cypress Tests
+    - name: Run Cypress Test
       run: npx cypress run
