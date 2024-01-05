@@ -3,7 +3,7 @@ module.exports = {
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
-    specPattern: 'cypress/integration/healthCheck.spec.cy.js'
+    specPattern: 'cypress/integration/randomlogin.cy.js'
   },
   defaultCommandTimeout: 20000,
 };
