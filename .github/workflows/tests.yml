@@ -1,3 +1,7 @@
+name: Cypress Tests
+
+on: [push, pull_request]
+
 jobs:
   cypress-test:
     runs-on: ubuntu-latest
@@ -5,9 +9,6 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-
-    - name: List directory contents
-      run: ls -la
 
     - name: Set up Node.js
       uses: actions/setup-node@v2
@@ -18,3 +19,4 @@ jobs:
       run: npm install
 
     - name: Run Cypress tests
+      run: npx cypress run
