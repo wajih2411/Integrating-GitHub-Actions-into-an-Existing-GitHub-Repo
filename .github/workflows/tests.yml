@@ -1,4 +1,4 @@
-name: Cypress Testss
+name: Cypress Tests
 
 on: [push, pull_request]
 
@@ -14,12 +14,15 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: '16' 
-
+        
     - name: Install Dependencies
       run: npm install
 
-    - name: List Cypress spec files
-      run: ls -la cypress/integration
+    - name: Verify Cypress Installation
+      run: npx cypress verify
+
+    - name: List Spec Files in Integration Directory
+      run: ls -la cypress/integration/
 
     - name: Run Cypress Tests
       run: npx cypress run
