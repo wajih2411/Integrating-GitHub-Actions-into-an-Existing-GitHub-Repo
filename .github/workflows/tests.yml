@@ -1,18 +1,25 @@
-name: Cypress Tests
+name: Cypress test
 
-on: [push, pull_request]
+on: push
 
-jobs:
+jobs: 
   cypress-run:
     runs-on: ubuntu-22.04
-    strategy:
-      fail-fast: false
+    strategy: 
+      fail-fast: false 
       matrix:
         containers: [1]
-
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
-    - name: Cypress run
-      uses: cypress-io/github-action@v5
+      - name: Cypress run
+        uses: cypress-io/github-action@v5
+        with:
+          start: npm start # Start the server before running tests
+          wait-on: 'http://localhost:8080' # Wait for the server to start
+          wait-on-timeout: 60 # seconds
+          browser: chrome # Run tests in Chrome
+          headless: true # Run browser in headless mode
+          config-file: cypress.json # Specify the Cypress config file
+          spec: cypress/integration/randomlogin.cy.js # Run only the specified spec file
