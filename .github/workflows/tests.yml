@@ -3,7 +3,7 @@ name: Cypress Tests
 on: [push, pull_request]
 
 jobs:
-  run-tests:
+  cypress-run:
     runs-on: ubuntu-latest
 
     steps:
@@ -13,10 +13,10 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '16' 
+        node-version: '16' # Ensure this matches the version you use locally
 
     - name: Install Dependencies
-      run: npm install
+      run: npm ci # This uses package-lock.json to install exact versions
 
-    - name: Run Cypress Test
+    - name: Run Cypress Tests
       run: npx cypress run
