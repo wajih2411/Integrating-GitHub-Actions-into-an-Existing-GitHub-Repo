@@ -1,19 +1,17 @@
-name: Cypress Tests
+name: Cypress test
 
-on: [push, pull_request]
+on: push
 
 jobs:
   cypress-run:
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1]
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v3
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '16' 
-
-    - name: Install Dependencies
-      run: npm ci 
+      - name: Cypress run
+        uses: cypress-io/github-action@v5
