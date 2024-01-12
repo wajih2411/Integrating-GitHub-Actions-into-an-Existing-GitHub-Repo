@@ -1,5 +1,4 @@
-
-      name: Cypress Test
+name: Simple Cypress Test
 
 on: [push]
 
