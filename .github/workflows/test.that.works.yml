@@ -1,12 +1,19 @@
-name: Basic CI
 
-on: [push, pull_request]
+      name: Cypress Test
+
+on: [push]
 
 jobs:
-  build:
+  cypress-run:
     runs-on: ubuntu-latest
+    container: cypress/browsers:node14.17.0-chrome88-ff89
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Run a one-line script
-      run: echo "Hello, world!"
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Run Cypress Test
+      run: $(npm bin)/cypress run
