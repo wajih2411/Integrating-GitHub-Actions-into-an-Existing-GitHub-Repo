@@ -4,8 +4,12 @@ on: [push, pull_request]
 
 jobs:
   cypress-run:
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1]
+        
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
@@ -20,7 +24,6 @@ jobs:
 
     - name: Run All Cypress Tests
       uses: cypress-io/github-action@v2
-      # This will run all tests in the cypress/integration folder
 
     - name: Run Health Check Test
       uses: cypress-io/github-action@v2
