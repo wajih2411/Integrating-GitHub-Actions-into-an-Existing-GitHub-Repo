@@ -1,18 +1,18 @@
-name: Cypress Test
+name: Cypress Tests
 
 on: [push, pull_request]
 
 jobs:
   cypress-run:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        containers: [1]
+        containers: [1, 2, 3]  
 
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v2
 
     - name: Set up Node.js
       uses: actions/setup-node@v2
@@ -20,17 +20,12 @@ jobs:
         node-version: '16'
 
     - name: Install Dependencies
-      run: npm ci
+      run: npm ci 
 
-    - name: Run All Cypress Tests
-      uses: cypress-io/github-action@v2
-
-    - name: Run Health Check Test
+    - name: Run Cypress Tests
       uses: cypress-io/github-action@v2
       with:
-        spec: cypress/integration/healthCheckTest.cy.js
-
-    - name: Run Retrieve Booking Test
-      uses: cypress-io/github-action@v2
-      with:
-        spec: cypress/integration/retrieveBooking.cy.js
+        record: true  
+        parallel: true  
+        group: 'E2E Tests'
+        ci-build-id: ${{ github.run_id }}-${{ matrix.containers }}
