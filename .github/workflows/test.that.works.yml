@@ -1,4 +1,4 @@
-name: Simple Cypress Test
+name: Simple Cypress Tests
 
 on: [push]
 
