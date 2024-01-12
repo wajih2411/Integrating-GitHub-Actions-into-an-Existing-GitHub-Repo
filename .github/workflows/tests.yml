@@ -9,13 +9,13 @@ jobs:
       fail-fast: false
       matrix:
         containers: [1]
-        
+
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set up Node.js
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v5
       with:
         node-version: '16'
 
@@ -23,9 +23,14 @@ jobs:
       run: npm ci
 
     - name: Run All Cypress Tests
-      uses: cypress-io/github-action@v2
+      uses: cypress-io/github-action@v5
 
     - name: Run Health Check Test
-      uses: cypress-io/github-action@v2
+      uses: cypress-io/github-action@v5
       with:
         spec: cypress/integration/healthCheckTest.cy.js
+
+    - name: Run Retrieve Booking Test
+      uses: cypress-io/github-action@v5
+      with:
+        spec: cypress/integration/retrieveBooking.cy.js
